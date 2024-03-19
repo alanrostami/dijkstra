@@ -1,38 +1,36 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
+#include <string>
 #include <limits>
 
 #define inf std::numeric_limits<int>::max()
 
-//std::vector<int> distance;
-//std::vector<char> prev;
+struct Node
+{
+    std::string name;
+    int distance; // Distance from origin
+    Node* prev; // Pointing to the previous node
+    bool isOpen;
+};
 
-void cheapestPath(int graph[][], int source);
+Node openNodes[7];
+
+int graph[7][7] =
+{
+    0, 10, 15, inf, 30, inf, inf,
+    inf, 0, inf, inf, inf, 57, inf,
+    15, inf, 0, 16, inf, inf, 52,
+    inf, inf, 13, 0, inf, inf, inf,
+    30, inf, inf, inf, 0, 11, 34,
+    inf, 49, inf, inf, 12, 0, inf,
+    inf, inf, 63, inf, 35, inf, 0
+};
+
+
+void cheapestPath(int graph[7][7], int source);
 
 int main(int argv, char* argc)
 {
-    int graph[7][7] =
-    {
-        0, 10, 15, inf, 30, inf, inf, 
-        inf, 0, inf, inf, inf, 57, inf, 
-        15, inf, 0, 16, inf, inf, 52, 
-        inf, inf, 13, 0, inf, inf, inf, 
-        30, inf, inf, inf, 0, 11, 34, 
-        inf, 49, inf, inf, 12, 0, inf, 
-        inf, inf, 63, inf, 35, inf, 0
-    };
-    
-    int i, j;
-
-    for (i = 0; i < 7; i++)
-    {
-        for (j = 0; j < 7; j++)
-        {
-            std::cout << "\t" << graph[i][j];
-        }
-        std::cout << std::endl;
-    }
+    cheapestPath(graph, 0);
 
     return 0;
 }
@@ -55,7 +53,19 @@ int main(int argv, char* argc)
 //                  prev[v] = u
 //      return dist[], prev[]
 
-void cheapestPath(int graph[][], int source)
+void cheapestPath(int graph[7][7], int source)
 {
+    int dist[7];
+    int prev[7];
 
+    for (int i = 0; i < 7; i++)
+    {
+        dist[i] = inf;
+        prev[i] = NULL;
+
+        openNodes[i].distance = inf;
+        openNodes[i].prev = NULL;
+
+        std::cout << openNodes[i].distance << std::endl;
+    }
 }
